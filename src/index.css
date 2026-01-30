@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Colors from Figma design */
+  --color-primary-dark: #043873;
+  --color-primary-light: #4F9CF9;
+  --color-accent-yellow: #FFE492;
+  --color-bg-light-blue: #C4DEFD;
+  --color-text-dark: #212529;
+
+  /* Spacing */
+  --spacing-section-x: 220px;
+  --spacing-section-y: 140px;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
