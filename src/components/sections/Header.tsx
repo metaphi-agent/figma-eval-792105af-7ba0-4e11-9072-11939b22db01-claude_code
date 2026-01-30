@@ -1,51 +1,91 @@
-import { ChevronDown } from 'lucide-react';
+import { useState } from 'react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import Button from '../ui/Button';
 
-export default function Header() {
-  return (
-    <header className="bg-[#043873] text-white py-4">
-      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[220px] flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center gap-2.5">
-          <img
-            src="./assets/logo-icon.svg"
-            alt="Whitepace logo"
-            className="w-[37px] h-[29px]"
-          />
-          <span className="text-xl md:text-2xl lg:text-[28px] font-bold">whitepace</span>
-        </div>
+const navItems = [
+  { label: 'Products', hasDropdown: true },
+  { label: 'Solutions', hasDropdown: true },
+  { label: 'Resources', hasDropdown: true },
+  { label: 'Pricing', hasDropdown: true },
+];
 
-        {/* Navigation */}
-        <div className="hidden lg:flex items-center gap-8 xl:gap-[60px]">
-          <nav className="hidden lg:flex items-center gap-4 xl:gap-8">
-            <div className="flex items-center gap-2.5 cursor-pointer hover:text-[#4F9CF9] transition-colors">
-              <span>Products</span>
-              <ChevronDown className="w-4 h-4" />
-            </div>
-            <div className="flex items-center gap-2.5 cursor-pointer hover:text-[#4F9CF9] transition-colors">
-              <span>Solutions</span>
-              <ChevronDown className="w-4 h-4" />
-            </div>
-            <div className="flex items-center gap-2.5 cursor-pointer hover:text-[#4F9CF9] transition-colors">
-              <span>Resources</span>
-              <ChevronDown className="w-4 h-4" />
-            </div>
-            <div className="flex items-center gap-2.5 cursor-pointer hover:text-[#4F9CF9] transition-colors">
-              <span>Pricing</span>
-              <ChevronDown className="w-4 h-4" />
-            </div>
+export default function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  return (
+    <header className="bg-primary-900 py-4">
+      <div className="section-padding">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <a href="/" className="flex items-center gap-2">
+            <img
+              src="./assets/logo.svg"
+              alt="Whitepace"
+              className="h-8"
+            />
+          </a>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-8">
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href="#"
+                className="flex items-center gap-2 text-white text-lg hover:text-white/80 transition-colors"
+              >
+                {item.label}
+                {item.hasDropdown && <ChevronDown className="w-4 h-4" />}
+              </a>
+            ))}
           </nav>
 
-          {/* CTA Buttons */}
-          <div className="flex items-center gap-3 lg:gap-6">
-            <Button variant="secondary" size="sm">
+          {/* Desktop Buttons */}
+          <div className="hidden lg:flex items-center gap-6">
+            <Button variant="secondary" size="md">
               Login
             </Button>
-            <Button variant="primary" size="sm" showArrow>
+            <Button variant="primary" size="md">
               Try Whitepace free
+              <svg className="ml-2 w-2.5 h-2.5" viewBox="0 0 10 10" fill="none">
+                <path d="M1 5H9M9 5L5 1M9 5L5 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </Button>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="lg:hidden text-white p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden mt-4 py-4 border-t border-white/20">
+            <nav className="flex flex-col gap-4">
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href="#"
+                  className="flex items-center justify-between text-white text-lg py-2"
+                >
+                  {item.label}
+                  {item.hasDropdown && <ChevronDown className="w-4 h-4" />}
+                </a>
+              ))}
+            </nav>
+            <div className="flex flex-col gap-3 mt-6">
+              <Button variant="secondary" size="md" className="w-full">
+                Login
+              </Button>
+              <Button variant="primary" size="md" className="w-full">
+                Try Whitepace free
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );
