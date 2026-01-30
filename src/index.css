@@ -1,27 +1,54 @@
 @import "tailwindcss";
 
 @theme {
+  /* Colors */
+  --color-primary-900: #043873;
+  --color-primary-500: #4F9CF9;
+  --color-primary-100: #C4DEFD;
+  --color-accent-yellow: #FFE492;
+  --color-text-dark: #212529;
+  --color-text-light: #FFFFFF;
+  --color-background-white: #FFFFFF;
+  --color-background-blue: #043873;
+
+  /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Colors from Figma design */
-  --color-primary-dark: #043873;
-  --color-primary-light: #4F9CF9;
-  --color-accent-yellow: #FFE492;
-  --color-bg-light-blue: #C4DEFD;
-  --color-text-dark: #212529;
+  /* Border radius */
+  --radius-button: 8px;
+  --radius-card: 10px;
+}
 
-  /* Spacing */
-  --spacing-section-x: 220px;
-  --spacing-section-y: 140px;
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2') format('woff2');
 }
 
 body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  margin: 0;
-  padding: 0;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
+/* Custom utility classes */
+.section-padding {
+  padding-left: max(20px, calc((100vw - 1480px) / 2));
+  padding-right: max(20px, calc((100vw - 1480px) / 2));
+}
+
+@media (min-width: 1920px) {
+  .section-padding {
+    padding-left: 220px;
+    padding-right: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
